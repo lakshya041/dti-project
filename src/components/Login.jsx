@@ -4,50 +4,107 @@ export default function AuthForm() {
   const [isSignIn, setIsSignIn] = useState(true);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="relative w-96 p-8 bg-white shadow-lg rounded-lg overflow-hidden">
-        {/* Gradient Background */}
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="relative w-[800px] h-[500px] bg-white rounded-2xl shadow-2xl overflow-hidden">
+        {/* Sliding Color Panel */}
         <div
-          className={`absolute top-0 left-0 w-full h-full bg-gradient-to-r from-pink-500 to-red-500 transition-transform duration-500 ${isSignIn ? "translate-x-0" : "-translate-x-full"}`}
-        ></div>
+          className={`absolute top-0 w-1/2 h-full bg-gradient-to-br from-red-500 to-pink-600 transition-all duration-700 ease-in-out z-20 ${
+            isSignIn ? "left-0" : "left-1/2"
+          }`}
+        >
+          {/* Content for Sign In state */}
+          <div 
+            className={`absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white p-8 transition-all duration-700 ${
+              isSignIn ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
+            }`}
+          >
+            <h3 className="text-3xl font-bold mb-4">Welcome Back!</h3>
+            <p className="text-center mb-6">
+              To keep connected with us please login with your personal info
+            </p>
+            <button
+              onClick={() => setIsSignIn(false)}
+              className="border-2 border-white px-8 py-2 rounded-full hover:bg-white hover:text-red-500 transition-colors"
+            >
+              Sign Up
+            </button>
+          </div>
 
-        <div className="relative z-10">
-          {isSignIn ? (
-            <SignInForm toggle={() => setIsSignIn(false)} />
-          ) : (
-            <SignUpForm toggle={() => setIsSignIn(true)} />
-          )}
+          {/* Content for Sign Up state */}
+          <div 
+            className={`absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white p-8 transition-all duration-700 ${
+              !isSignIn ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+            }`}
+          >
+            <h3 className="text-3xl font-bold mb-4">Hello, Friend!</h3>
+            <p className="text-center mb-6">
+              Enter your personal details and start journey with us
+            </p>
+            <button
+              onClick={() => setIsSignIn(true)}
+              className="border-2 border-white px-8 py-2 rounded-full hover:bg-white hover:text-red-500 transition-colors"
+            >
+              Sign In
+            </button>
+          </div>
+        </div>
+
+        {/* Forms Container */}
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className={`absolute w-full h-full transition-transform duration-700 ease-in-out ${
+            isSignIn ? "translate-x-100" : "-translate-x-1/2"
+          }`}>
+            {/* Sign In Form */}
+            <div className={`absolute left-0 w-1/2 h-full flex items-center justify-center transition-all duration-700 ${
+              isSignIn ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}>
+              <div className="w-[300px]">
+                <h2 className="text-3xl font-bold text-gray-800 mb-8">Sign In</h2>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
+                />
+                <button className="w-full py-3 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg hover:opacity-90 transition-opacity">
+                  Sign In
+                </button>
+              </div>
+            </div>
+
+            {/* Sign Up Form */}
+            <div className={`absolute left-1/2 w-1/2 h-full flex items-center justify-center transition-all duration-700 ${
+              !isSignIn ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}>
+              <div className="w-[300px]">
+                <h2 className="text-3xl font-bold text-gray-800 mb-8">Create Account</h2>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
+                />
+                <button className="w-full py-3 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg hover:opacity-90 transition-opacity">
+                  Sign Up
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function SignInForm({ toggle }) {
-  return (
-    <div className="text-center">
-      <h2 className="text-2xl font-bold mb-4">Sign In</h2>
-      <input type="email" placeholder="Email" className="w-full p-2 mb-2 border rounded" />
-      <input type="password" placeholder="Password" className="w-full p-2 mb-2 border rounded" />
-      <button className="w-full py-2 bg-red-500 text-white rounded">Sign In</button>
-      <p className="mt-4 text-sm">
-        New here? <span className="text-red-500 cursor-pointer" onClick={toggle}>Sign Up</span>
-      </p>
-    </div>
-  );
-}
-
-function SignUpForm({ toggle }) {
-  return (
-    <div className="text-center">
-      <h2 className="text-2xl font-bold mb-4">Create Account</h2>
-      <input type="text" placeholder="Name" className="w-full p-2 mb-2 border rounded" />
-      <input type="email" placeholder="Email" className="w-full p-2 mb-2 border rounded" />
-      <input type="password" placeholder="Password" className="w-full p-2 mb-2 border rounded" />
-      <button className="w-full py-2 bg-red-500 text-white rounded">Sign Up</button>
-      <p className="mt-4 text-sm">
-        Already have an account? <span className="text-red-500 cursor-pointer" onClick={toggle}>Sign In</span>
-      </p>
     </div>
   );
 }
