@@ -8,7 +8,7 @@ export default function AuthForm() {
       <div className="relative w-[800px] h-[500px] bg-white rounded-2xl shadow-2xl overflow-hidden">
         {/* Sliding Color Panel */}
         <div
-          className={`absolute top-0 w-1/2 h-full bg-gradient-to-br from-red-500 to-pink-600 transition-all duration-700 ease-in-out z-20 ${
+          className={`absolute top-0 w-1/2 h-full bg-gradient-to-br from-red-600 to-orange-500 transition-all duration-700 ease-in-out z-20 ${
             isSignIn ? "left-0" : "left-1/2"
           }`}
         >
@@ -61,7 +61,7 @@ export default function AuthForm() {
               <div className="w-[300px]">
                 <h2 className="text-3xl font-bold text-gray-800 mb-8">Sign In</h2>
                 <input
-                  type="email"
+                  type="email"                  
                   placeholder="Email"
                   className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
@@ -70,7 +70,16 @@ export default function AuthForm() {
                   placeholder="Password"
                   className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
-                <button className="w-full py-3 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg hover:opacity-90 transition-opacity">
+                <div className="flex items-center justify-between w-full text-gray-700 text-sm py-6">
+                  <label className="flex items-center">
+                    <input type="checkbox" className="mr-2 accent-blue-500" />
+                    Remember me
+                  </label>
+                  <a href="#" className="text-orange-500 hover:underline">
+                    Forgot password?
+                  </a>
+                </div>
+                <button className="w-full py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-lg hover:opacity-90 transition-opacity">
                   Sign In
                 </button>
               </div>
@@ -97,7 +106,8 @@ export default function AuthForm() {
                   placeholder="Password"
                   className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
-                <button className="w-full py-3 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg hover:opacity-90 transition-opacity">
+                
+                <button className="w-full py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-lg hover:opacity-90 transition-opacity">
                   Sign Up
                 </button>
               </div>

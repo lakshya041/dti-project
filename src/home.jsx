@@ -1,12 +1,12 @@
 const Home = () => {
   function tologin(){
-    window.location.href = "http://localhost:5173/login"
+    window.location.href = "http://localhost:5173/Login"
   }
   return (
     <div className="bg-[#3a2a25] min-h-screen flex justify-center bg-opacity-90 bg-[url('data:image/svg+xml,...')] bg-fixed">
-      <div className="bg-white w-full max-w-7xl px-8 overflow-hidden">
+      <div className="bg-white w-full  px-8 overflow-hidden">
         <nav className="flex justify-between items-center py-6 sticky top-0 bg-white/95 backdrop-blur-sm z-50 shadow-sm">
-          <h1 className="text-2xl font-bold text-orange-600 hover:text-orange-700 transition-colors duration-300">
+          <h1 className="text-2xl font-bold text-orange-600 hover:text-orange-700 transition-colors duration-300 pl-4">
             JUST EMPLOYED.
           </h1>
           <ul className="flex gap-6 text-sm">
@@ -18,7 +18,7 @@ const Home = () => {
             </div>
           </ul>
           {/* Updated button styling */}
-          <div className="flex justify-center gap-[20px] rounded">
+          <div className="flex justify-center gap-[20px] rounded pr-4">
             <button onClick={tologin} className="border cursor-pointer border-orange-500 text-orange-500 px-6 py-2 rounded-full hover:bg-orange-500 hover:text-white transition-all duration-300">
               Join Now
             </button>
@@ -119,5 +119,5 @@ export default Home;
 
 
 
-//Freelancer ® is a registered Trademark of Freelancer Technology Pty Limited (ACN 142 189 759) & Freelancer Online India Private Limited (CIN U93000HR2011FTC043854)Copyright © 2025 Freelancer Technology Pty Limited (ACN 142 189 759)
-//Freelancer ® is a registered Trademark of Freelancer Technology Pty Limited (ACN 142 189 759) & Freelancer Online India Private Limited (CIN U93000HR2011FTC043854)Copyright © 2025 Freelancer Technology Pty Limited (ACN 142 189 759)
+//Just Employed ® is a registered Trademark of Just Employed Pty Limited (ACN 142 189 759) & Freelancer Online India Private Limited (CIN U93000HR2011FTC043854)Copyright © 2025 Just Employed Pty Limited (ACN 142 189 759)
+//Just Employed ® is a registered Trademark of Just Employed Pty Limited (ACN 142 189 759) & Freelancer Online India Private Limited (CIN U93000HR2011FTC043854)Copyright © 2025 Just Employed Pty Limited (ACN 142 189 759)
