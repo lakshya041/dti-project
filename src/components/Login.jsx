@@ -1,7 +1,18 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function AuthForm() {
   const [isSignIn, setIsSignIn] = useState(true);
+  const signInEmailRef = useRef()
+
+  function signinHandler(){
+    if(signInEmailRef.current.value){
+
+      location.href = 'http://localhost:5173/newpage'
+    }
+    else{
+      alert("Please fill all fields")
+    }
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -15,7 +26,7 @@ export default function AuthForm() {
           {/* Content for Sign In state */}
           <div 
             className={`absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white p-8 transition-all duration-700 ${
-              isSignIn ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
+              isSignIn ? "translate-x-0 opacity-100" : "-translate-x-full hidden opacity-0"
             }`}
           >
             <h3 className="text-3xl font-bold mb-4">Welcome Back!</h3>
@@ -24,7 +35,7 @@ export default function AuthForm() {
             </p>
             <button
               onClick={() => setIsSignIn(false)}
-              className="border-2 border-white px-8 py-2 rounded-full hover:bg-white hover:text-red-500 transition-colors"
+              className="cursor-pointer border-2 border-white px-8 py-2 rounded-full hover:bg-white hover:text-red-500 transition-colors"
             >
               Sign Up
             </button>
@@ -33,7 +44,7 @@ export default function AuthForm() {
           {/* Content for Sign Up state */}
           <div 
             className={`absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white p-8 transition-all duration-700 ${
-              !isSignIn ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+              !isSignIn ? "translate-x-0 opacity-100" : "translate-x-full hidden opacity-0"
             }`}
           >
             <h3 className="text-3xl font-bold mb-4">Hello, Friend!</h3>
@@ -42,7 +53,7 @@ export default function AuthForm() {
             </p>
             <button
               onClick={() => setIsSignIn(true)}
-              className="border-2 border-white px-8 py-2 rounded-full hover:bg-white hover:text-red-500 transition-colors"
+              className="cursor-pointer border-2 border-white px-8 py-2 rounded-full hover:bg-white hover:text-red-500 transition-colors"
             >
               Sign In
             </button>
@@ -61,6 +72,7 @@ export default function AuthForm() {
               <div className="w-[300px]">
                 <h2 className="text-3xl font-bold text-gray-800 mb-8">Sign In</h2>
                 <input
+                ref={signInEmailRef}
                   type="email"                  
                   placeholder="Email"
                   className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
@@ -79,7 +91,7 @@ export default function AuthForm() {
                     Forgot password?
                   </a>
                 </div>
-                <button className="w-full py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-lg hover:opacity-90 transition-opacity">
+                <button  onClick={signinHandler} className="cursor-pointer w-full py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-lg hover:opacity-90 transition-opacity">
                   Sign In
                 </button>
               </div>
@@ -107,7 +119,7 @@ export default function AuthForm() {
                   className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
                 
-                <button className="w-full py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-lg hover:opacity-90 transition-opacity">
+                <button className="cursor-pointer w-full py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-lg hover:opacity-90 transition-opacity">
                   Sign Up
                 </button>
               </div>
