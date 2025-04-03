@@ -80,7 +80,7 @@ const Home = () => {
             </div>
             <div className="flex flex-col items-center max-w-xs text-center rounded-xl bg-white p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
               <img src='../src/assets/4.png' alt="Payment" className="w-16 h-16 mb-4 hover:rotate-12 transition-transform duration-300" />
-              <p className="text-lg text-gray-700">Only pay when you're happy</p>
+              <p className="text-lg text-gray-700">Only pay when you're happy  ......</p>
             </div>
           </div>
         </div>
@@ -99,11 +99,68 @@ const Home = () => {
             </div>
           </div>
         </div>
+             
 
+         <div className="bg-gradient-to-r from-gray-900 to-black text-white flex flex-row items-start space-x-6 p-4 ">
+        {/* Sidebar Navigation */}
+        <nav className="bg-black p-4 w-90 ">
+          <ul className="flex flex-col space-y-4">
+            <li>
+              <a href="#" className="text-white hover:text-gray-400 flex items-center space-x-2">
+                <img src="/path-to-home-icon.png" alt="Home" className="w-6 h-6" />
+                <span>Mail</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" className="text-white hover:text-gray-400 flex items-center space-x-2">
+                <img src="/path-to-about-icon.png" alt="About" className="w-6 h-6" />
+                <span>Contact No</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" className="text-white hover:text-gray-400 flex items-center space-x-2">
+                <img src="../src/assets/9.png" alt="Services" className="w-6 h-6" />
+                <span>G1</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" className="text-white hover:text-gray-400 flex items-center space-x-2">
+                <img src="../src/assets/9.png" alt="Portfolio" className="w-6 h-6" />
+                <span>G2</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" className="text-white hover:text-gray-400 flex items-center space-x-2">
+                <img src="../src/assets/9.png" alt="Contact" className="w-6 h-6" />
+                <span>G3</span>
+              </a>
+            </li>
+            <li>
+              <div className="flex space-x-6">
+                <a href="#"><img src="../src/assets/6.png" alt="Whatsapp" className="w-6 h-6" /></a>
+                <a href="#"><img src="../src/assets/7.png" alt="Extra 2" className="w-6 h-6" /></a>
+                <a href="#"><img src="../src/assets/8.png" alt="Extra 3" className="w-6 h-6" /></a>
+              </div>
+            </li>
+          </ul>
+        </nav>
 
-        <footer className="bg-gradient-to-r from-gray-900 to-black text-white text-center py-10 mt-16">
-          <p className="text-lg">&copy; 2025 Just Employed. All rights reserved.</p>
-        </footer>
+  {/* Main Content */}
+  <div className="flex-1 container mx-auto py-10 text-center">
+    <h2 className="text-3xl font-bold mb-6">Join Our Community</h2>
+    <p className="mb-4">Stay updated with the latest news and offers.</p>
+    <form className="flex justify-center">
+      <input type="email" placeholder="Enter your email" className="px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500" />
+      <button type="submit" className="bg-orange-500 text-white px-4 py-2 rounded-r-lg hover:bg-orange-600 transition-all duration-300">Subscribe</button>
+    </form>
+  </div>
+</div>
+
+{/* Footer (Separate) */}
+<footer className="text-center py-6 bg-black text-white">
+  <p className="text-lg">&copy; 2025 Just Employed. All rights reserved.</p>
+</footer>
+        
 
       </div>
     </div>
