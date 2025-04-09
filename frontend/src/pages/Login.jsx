@@ -7,7 +7,7 @@ export default function AuthForm() {
   function signinHandler(){
     if(signInEmailRef.current.value){
 
-      location.href = 'http://localhost:5173/newpage'
+      location.href = '/'
     }
     else{
       alert("Please fill all fields")
