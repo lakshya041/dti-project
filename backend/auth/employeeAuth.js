@@ -7,23 +7,39 @@ const JWT_SECRET = process.env.JWT_SECRET;
 import { z } from "zod";
 const employeeLoginRouter = Router()
 const employeeSignupRouter = Router()
+import { employeeModel } from "../db";
 
 employeeLoginRouter.post("/", async function (req, res) {
     const username = req.body.username
     const password = req.body.password
 
-    {
-        //Db checking, bcrypt compares
+    const dbRes = await employeeModel.findOne({
+        username: username
+    })
+    if (dbRes) {
+
+        if (dbRes.password == password) {
+
+            const token = jwt.sign({
+                username
+            }, JWT_SECRET)
+
+            res.json({
+                message: "login Success",
+                token: token
+            })
+        }
+        else ({
+            message: "invalid password"
+        })
+    }
+    else {
+        res.json({
+            message: "login unsuccessful"
+        })
     }
 
-    const token = jwt.sign({
-        username
-    }, JWT_SECRET)
 
-    res.json({
-        message: "login Success",
-        token: token
-    })
 })
 
 employeeSignupRouter.post("/", async function (req, res) {
@@ -32,18 +48,32 @@ employeeSignupRouter.post("/", async function (req, res) {
     const email = req.body.email
 
 
-    {
-        //Db checking, bcrypt compares
+    const dbRes = await employeeModel.findOne({
+        username: username
+    })
+    if (!dbRes) {
+
+        employeeModel.create({
+            username: username,
+            password: password,
+            email: email
+        })
+
+        const token = jwt.sign({
+            username
+        }, JWT_SECRET)
+
+        res.json({
+            message: "signup Success",
+            token: token
+        })
+    }
+    else {
+        res.json({
+            message: "username alredy exist"
+        })
     }
 
-    const token = jwt.sign({
-        username
-    }, JWT_SECRET)
-
-    res.json({
-        message: "signup Success",
-        token: token
-    })
 })
 
 export {
