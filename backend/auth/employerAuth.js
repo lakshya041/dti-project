@@ -2,6 +2,7 @@ import { Router } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
+import bCrypt from "bcrypt";
 const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET;
 const JWT_SECRET = process.env.JWT_SECRET;
 import { z } from "zod";
@@ -18,7 +19,9 @@ employerLoginRouter.post("/", async function (req, res) {
     })
     if (dbRes) {
 
-        if (dbRes.password == password) {
+        const comparePassword = await bCrypt.compare(password, dbRes.password)
+
+        if (comparePassword) {
 
             const token = jwt.sign({
                 username
@@ -54,16 +57,16 @@ employerSignupRouter.post("/", async function (req, res) {
     const password = req.body.password
     const email = req.body.email
 
-
     
     const dbRes = await employerModel.findOne({
         username: username
     })
     if (!dbRes) {
-
+        
+        const hashedPassword = await bCrypt.hash(password, 10)
         employerModel.create({
             username: username,
-            password: password,
+            password: hashedPassword,
             email: email
         })
 
