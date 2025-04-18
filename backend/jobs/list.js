@@ -24,17 +24,21 @@ function generateRandomString() {
 
 addJobsRouter.post("/", async function (req, res) {
 
+    const username = jwt.verify(req.body.token, JWT_SECRET)
     const jobId = generateRandomString()
+    const minsalaryRangeInt = parseInt(req.body.minsalaryRange)
+    const maxsalaryRangeInt = parseInt(req.body.maxsalaryRange)
+
     jobsModel.create({
         jobId: jobId,
-        username: req.body.username,
+        username: username,
         type: req.body.type,
         location: req.body.location,
         organization: req.body.organization,
         description: req.body.description,
         salaryRange: {
-            min: req.body.minsalaryRange,
-            max: req.body.maxsalaryRange,
+            min: minsalaryRangeInt,
+            max: maxsalaryRangeInt,
         },
         experienceLevel: req.body.experienceLevel,
 

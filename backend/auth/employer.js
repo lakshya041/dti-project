@@ -42,14 +42,6 @@ employerLoginRouter.post("/", async function (req, res) {
         })
     }
 
-    const token = jwt.sign({
-        username
-    }, JWT_SECRET)
-
-    res.json({
-        message: "login Success",
-        token: token
-    })
 })
 
 employerSignupRouter.post("/", async function (req, res) {
@@ -85,14 +77,6 @@ employerSignupRouter.post("/", async function (req, res) {
         })
     }
 
-    const token = jwt.sign({
-        username
-    }, JWT_SECRET)
-
-    res.json({
-        message: "signup Success",
-        token: token
-    })
 })
 
 export {
