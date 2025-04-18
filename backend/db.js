@@ -24,6 +24,22 @@ const employeeDocumentSchema = new Schema({
     }
 });
 
+const employerDocumentSchema = new Schema({
+    username: String,
+    documentType: {
+        type: String,
+        required: true
+    },
+    documentNumber: {
+        type: String,
+        required: true
+    },
+    documentUrl: {
+        type: String,
+        required: true
+    }
+});
+
 const employerSchema = new Schema({
     username: String,
     email: String,
@@ -55,11 +71,13 @@ const employerModel = mongoose.model("employee", employerSchema)
 const jobsModel = mongoose.model("jobs", jobsSchema)
 const appliedModel = mongoose.model("applied", appliedSchema)
 const employeeDocumentModel = mongoose.model("employeeDocument", employeeDocumentSchema)
+const employerDocumentModel = mongoose.model("employerDocument", employerDocumentSchema)
 
 export {
     employeeModel,
     employerModel,
     jobsModel,
     appliedModel,
-    employeeDocumentModel
+    employeeDocumentModel,
+    employerDocumentModel
 }
