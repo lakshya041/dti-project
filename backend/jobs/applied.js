@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
 import { z } from "zod";
-import { jobsModel } from "../db";
+import { jobsModel } from "../db.js";
 const applyJobsRouter = Router()
 
 applyJobsRouter.post("/", async function (req, res) {

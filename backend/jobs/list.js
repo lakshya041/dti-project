@@ -7,7 +7,7 @@ import { z } from "zod";
 const addJobsRouter = Router()
 const removeJobsRouter = Router()
 const loadAllRouter = Router()
-import {jobsModel } from "../db";
+import {jobsModel } from "../db.js";
 
 function generateRandomString() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

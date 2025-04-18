@@ -6,7 +6,7 @@ import bCrypt from "bcrypt";
 const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET;
 const JWT_SECRET = process.env.JWT_SECRET;
 import { z } from "zod";
-import { employerModel } from "../db";
+import { employerModel } from "../db.js";
 const employerLoginRouter = Router()
 const employerSignupRouter = Router()
 

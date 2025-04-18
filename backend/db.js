@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const Schema = mongoose.schema
+const Schema = mongoose.Schema
 
 const employeeSchema = new Schema({
     username: String,
@@ -67,7 +67,7 @@ const appliedSchema = new Schema({
 })
 
 const employeeModel = mongoose.model("employee", employeeSchema)
-const employerModel = mongoose.model("employee", employerSchema)
+const employerModel = mongoose.model("employer", employerSchema)
 const jobsModel = mongoose.model("jobs", jobsSchema)
 const appliedModel = mongoose.model("applied", appliedSchema)
 const employeeDocumentModel = mongoose.model("employeeDocument", employeeDocumentSchema)

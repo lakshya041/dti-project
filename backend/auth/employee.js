@@ -8,7 +8,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 import { z } from "zod";
 const employeeLoginRouter = Router()
 const employeeSignupRouter = Router()
-import { employeeModel } from "../db";
+import { employeeModel } from "../db.js";
 
 employeeLoginRouter.post("/", async function (req, res) {
     const username = req.body.username

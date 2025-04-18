@@ -2,16 +2,16 @@ import express from "express"
 import cors from "cors"
 const app = express()
 app.use(cors())
-import { employeeLoginRouter, employeeSignupRouter } from "./auth/employee"
 app.use(express.json())
 import dotenv from "dotenv"
 dotenv.config();
 import mongoose from "mongoose"
-import { employerSignupRouter } from "./auth/employer"
-import { addJobsRouter, loadAllRouter, removeJobsRouter } from "./jobs/list"
-import { applyJobsRouter } from "./jobs/applied"
-import { employeeVerificationRouter } from "./verification/employee"
-import { employerVerificationRouter } from "./verification/employer"
+import { employeeLoginRouter, employeeSignupRouter } from "./auth/employee.js"
+import { employerSignupRouter } from "./auth/employer.js"
+import { addJobsRouter, loadAllRouter, removeJobsRouter } from "./jobs/list.js"
+import { applyJobsRouter } from "./jobs/applied.js"
+import { employeeVerificationRouter } from "./verification/employee.js"
+import { employerVerificationRouter } from "./verification/employer.js"
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI || "";
 

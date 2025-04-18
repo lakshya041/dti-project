@@ -5,7 +5,7 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
 import { z } from "zod";
 const employeeVerificationRouter = Router()
-import {employeeDocumentModel} from "../db";
+import {employeeDocumentModel} from "../db.js";
 
 employeeVerificationRouter.post("/", async function (req, res) {
     const token = req.body.token
