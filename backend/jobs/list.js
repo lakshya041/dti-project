@@ -2,13 +2,12 @@ import { Router } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
-const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET;
 const JWT_SECRET = process.env.JWT_SECRET;
 import { z } from "zod";
 const addJobsRouter = Router()
 const removeJobsRouter = Router()
 const loadAllRouter = Router()
-import { employeeModel, jobsModel } from "../db";
+import {jobsModel } from "../db";
 
 function generateRandomString() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -72,5 +71,6 @@ loadAllRouter.get("/", async function (req, res) {
 
 export {
     addJobsRouter,
-    removeJobsRouter
+    removeJobsRouter,
+    loadAllRouter
 }

@@ -28,12 +28,19 @@ const jobsSchema = new Schema({
 
 })
 
+const appliedSchema = new Schema({
+    username: String,
+    jobsId: Array,
+})
+
 const employeeModel = mongoose.model("employee", employeeSchema)
 const employerModel = mongoose.model("employee", employerSchema)
 const jobsModel = mongoose.model("jobs", jobsSchema)
+const appliedModel = mongoose.model("applied", appliedSchema)
 
 export {
     employeeModel,
     employerModel,
-    jobsModel
+    jobsModel,
+    appliedModel
 }
