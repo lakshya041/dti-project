@@ -5,6 +5,7 @@ const employeeSchema = new Schema({
     username: String,
     email: String,
     password: String,
+    appliedId: Array,
 
 });
 
@@ -48,6 +49,8 @@ const employerSchema = new Schema({
 });
 
 const jobsSchema = new Schema({
+    jobId:String,
+    username: String,
     type: String,
     location: String,
     organization: String,
@@ -58,18 +61,12 @@ const jobsSchema = new Schema({
       },
     experienceLevel: String,
     // postedDate: Date
-
 })
 
-const appliedSchema = new Schema({
-    username: String,
-    jobsId: Array,
-})
 
 const employeeModel = mongoose.model("employee", employeeSchema)
 const employerModel = mongoose.model("employer", employerSchema)
 const jobsModel = mongoose.model("jobs", jobsSchema)
-const appliedModel = mongoose.model("applied", appliedSchema)
 const employeeDocumentModel = mongoose.model("employeeDocument", employeeDocumentSchema)
 const employerDocumentModel = mongoose.model("employerDocument", employerDocumentSchema)
 
@@ -77,7 +74,6 @@ export {
     employeeModel,
     employerModel,
     jobsModel,
-    appliedModel,
     employeeDocumentModel,
     employerDocumentModel
 }

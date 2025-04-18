@@ -29,9 +29,9 @@ addJobsRouter.post("/", async function (req, res) {
     const minsalaryRangeInt = parseInt(req.body.minsalaryRange)
     const maxsalaryRangeInt = parseInt(req.body.maxsalaryRange)
 
-    jobsModel.create({
+    const dbRes = await jobsModel.create({
         jobId: jobId,
-        username: username,
+        username: username.username,
         type: req.body.type,
         location: req.body.location,
         organization: req.body.organization,
@@ -43,7 +43,12 @@ addJobsRouter.post("/", async function (req, res) {
         experienceLevel: req.body.experienceLevel,
 
     })
-
+    if (!dbRes) {
+        res.json({
+            message: "error in adding job"
+        })
+        return
+    }
     res.json({
         message: "added success"
     })
@@ -53,12 +58,22 @@ addJobsRouter.post("/", async function (req, res) {
 removeJobsRouter.post("/", async function (req, res) {
 
     const jobId = req.jobId
-    const username = jwt.verify(req.token, JWT_SECRET)
-    await jobsModel.deleteOne({
+    const username = jwt.verify(req.body.token, JWT_SECRET)
+    const dbRes = await jobsModel.deleteOne({
         username: username,
         jobId: jobId
 
     })
+    if(dbRes.deletedCount){
+        res.json({
+            message: "deleted success"
+        })
+    }
+    else{
+        res.json({
+            message: "job not found"
+        })
+    }
 
 })
 
