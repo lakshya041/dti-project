@@ -51,6 +51,7 @@ const employerSchema = new Schema({
 const jobsSchema = new Schema({
     jobId:String,
     username: String,
+    openings: Number,
     type: String,
     location: String,
     organization: String,

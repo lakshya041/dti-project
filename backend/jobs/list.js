@@ -15,7 +15,7 @@ function generateRandomString() {
 
     for (let i = 0; i < 10; i++) {
         const randomIndex = Math.floor(Math.random() * characters.length);
-        randomString += characters[randomIndex]; // Picks a random character from the string
+        randomString += characters[randomIndex];
     }
 
     return randomString;
@@ -29,9 +29,31 @@ addJobsRouter.post("/", async function (req, res) {
     const minsalaryRangeInt = parseInt(req.body.minsalaryRange)
     const maxsalaryRangeInt = parseInt(req.body.maxsalaryRange)
 
+    const jobExist = await jobsModel.findOne({
+        username: username.username,
+        openings: req.body.openings,
+        type: req.body.type,
+        location: req.body.location,
+        organization: req.body.organization,
+        description: req.body.description,
+        salaryRange: {
+            min: minsalaryRangeInt,
+            max: maxsalaryRangeInt,
+        },
+        experienceLevel: req.body.experienceLevel,
+        
+    })
+    if (jobExist) {
+        res.json({
+            message: "job already exists"
+        })
+        return
+    }
+
     const dbRes = await jobsModel.create({
         jobId: jobId,
         username: username.username,
+        openings: req.body.openings,
         type: req.body.type,
         location: req.body.location,
         organization: req.body.organization,
