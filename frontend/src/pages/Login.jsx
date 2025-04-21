@@ -1,16 +1,52 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthForm() {
+  const navigate = useNavigate();
   const [isSignIn, setIsSignIn] = useState(true);
   const signInEmailRef = useRef()
+  const signInPasswordRef = useRef()
+  const signupNameRef = useRef()
+  const signupEmailRef = useRef()
+  const signupPasswordRef = useRef()
 
-  function signinHandler(){
-    if(signInEmailRef.current.value){
+  async function signinHandler(){
+    const res = await fetch("http://localhost:3000/employerlogin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: signInEmailRef.current.value,
+        password: signInPasswordRef.current.value,
+      }),
+    });
 
-      location.href = '/'
+    const data = await res.json();
+    console.log(data);
+    if (data.message === "login Success") {
+      document.cookie = `${data.token}; path=/;`;
+      navigate("/");
     }
-    else{
-      alert("Please fill all fields")
+  }
+
+  async function signupHandler(){
+    const res = await fetch("http://localhost:3000/employersignup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: signupEmailRef.current.value,
+        password: signupPasswordRef.current.value,
+        username: signupNameRef.current.value,
+      }),
+    });
+
+    const data = await res.json();
+    if (data.message === "signup Success") {
+      document.cookie = `${data.token}; path=/;`;
+      navigate("/");
     }
   }
 
@@ -78,6 +114,7 @@ export default function AuthForm() {
                   className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
                 <input
+                ref={signInPasswordRef}
                   type="password"
                   placeholder="Password"
                   className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
@@ -104,22 +141,25 @@ export default function AuthForm() {
               <div className="w-[300px]">
                 <h2 className="text-3xl font-bold text-gray-800 mb-8">Create Account</h2>
                 <input
+                ref={signupNameRef}
                   type="text"
                   placeholder="Name"
                   className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
                 <input
+                ref={signupEmailRef}
                   type="email"
                   placeholder="Email"
                   className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
                 <input
+                ref={signupPasswordRef}
                   type="password"
                   placeholder="Password"
                   className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
                 
-                <button className="cursor-pointer w-full py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-lg hover:opacity-90 transition-opacity">
+                <button onClick={signupHandler} className="cursor-pointer w-full py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-lg hover:opacity-90 transition-opacity">
                   Sign Up
                 </button>
               </div>

@@ -11,16 +11,17 @@ const employerLoginRouter = Router()
 const employerSignupRouter = Router()
 
 employerLoginRouter.post("/", async function (req, res) {
-    const username = req.body.username
+    const email = req.body.email
     const password = req.body.password
 
     const dbRes = await employerModel.findOne({
-        username: username
+        email: email
     })
+
     if (dbRes) {
 
         const comparePassword = await bCrypt.compare(password, dbRes.password)
-
+        const username = dbRes.username
         if (comparePassword) {
 
             const token = jwt.sign({
@@ -51,7 +52,7 @@ employerSignupRouter.post("/", async function (req, res) {
 
     
     const dbRes = await employerModel.findOne({
-        username: username
+        email: email
     })
     if (!dbRes) {
         
