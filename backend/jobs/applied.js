@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
 import { z } from "zod";
-import { employeeModel} from "../db.js";
+import { employeeModel, employerDashboardModel, jobsModel } from "../db.js";
 const applyJobsRouter = Router()
 
 applyJobsRouter.post("/", async function (req, res) {
@@ -15,15 +15,14 @@ applyJobsRouter.post("/", async function (req, res) {
     })
     let alredyApplied = false
     if (jobDetails) {
-        
+
         jobDetails.appliedId.forEach((job) => {
             if (job == jobId) {
                 alredyApplied = true
             }
-        }   )
-        
-    }
+        })
 
+    }
 
     if (alredyApplied) {
         res.json({
@@ -37,6 +36,21 @@ applyJobsRouter.post("/", async function (req, res) {
         }, {
             $set: {
                 appliedId: prevapplied
+            }
+        })
+        const res1 = await jobsModel.findOne({
+            jobId: jobId
+        })
+        const employerUsername = res1.username
+        const dash = await employerDashboardModel.findOne({
+            username: employerUsername
+        })
+        const newNoApplications = dash.totalApplicationsReceived + 1
+        await employerDashboardModel.updateOne({
+            username: employerUsername
+        }, {
+            $set: {
+                totalApplicationsReceived: newNoApplications
             }
         })
         res.json({

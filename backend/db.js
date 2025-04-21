@@ -64,17 +64,26 @@ const jobsSchema = new Schema({
     // postedDate: Date
 })
 
+const employerDashboardSchema = new Schema({
+    username: String,
+    totalJobsPosted: Number,
+    totalApplicationsReceived: Number,
+    totalShortlistedCandidates: Number,
+    totalHiredEmployees: Number
+})
 
 const employeeModel = mongoose.model("employee", employeeSchema)
 const employerModel = mongoose.model("employer", employerSchema)
 const jobsModel = mongoose.model("jobs", jobsSchema)
 const employeeDocumentModel = mongoose.model("employeeDocument", employeeDocumentSchema)
 const employerDocumentModel = mongoose.model("employerDocument", employerDocumentSchema)
+const employerDashboardModel = mongoose.model("employerDashboard", employerDashboardSchema)
 
 export {
     employeeModel,
     employerModel,
     jobsModel,
     employeeDocumentModel,
-    employerDocumentModel
+    employerDocumentModel,
+    employerDashboardModel
 }

@@ -23,9 +23,9 @@ export default function AuthForm() {
     });
 
     const data = await res.json();
-    console.log(data);
     if (data.message === "login Success") {
       document.cookie = `${data.token}; path=/;`;
+      console.log(data.token);
       navigate("/");
     }
   }

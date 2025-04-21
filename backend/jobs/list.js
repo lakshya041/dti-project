@@ -101,9 +101,10 @@ removeJobsRouter.post("/", async function (req, res) {
 })
 
 loadAlluserJobsRouter.get("/", async function (req, res) {
-    const username = req.headers.username
+    const token = req.headers.token
+    const username = jwt.verify(token, JWT_SECRET)
     const jobs = await jobsModel.find({
-        username: username
+        username: username.username
     })
     res.json({
         message: "got jobs",
