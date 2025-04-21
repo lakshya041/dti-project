@@ -3,11 +3,14 @@ import { Briefcase, Users, CheckCircle, UserPlus } from 'lucide-react';
 
 const EmployerDashboard = () => {
   const [totalListedJobs, setTotalListedJobs] = useState(0);
+  const [totalApplicationsReceived, setTotalApplicationsReceived] = useState(0);
+  const [totalShortlistedCandidates, setTotalShortlistedCandidates] = useState(0);
+  const [totalHiredEmployees, setTotalHiredEmployees] = useState(0);
 
   useEffect(() => {
 
     async function main() {
-      const res = await fetch("http://localhost:3000/loadAlluserJobs", {
+      const res = await fetch("http://localhost:3000/dahboarddata", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -15,7 +18,10 @@ const EmployerDashboard = () => {
         },
       });
       const data = await res.json();
-      setTotalListedJobs(data.jobs.length);
+      setTotalListedJobs(data.data.totalJobsPosted);
+      setTotalApplicationsReceived(data.data.totalApplicationsReceived);
+      setTotalShortlistedCandidates(data.data.totalShortlistedCandidates);
+      setTotalHiredEmployees(data.data.totalHiredEmployees);
     }
     main()
   }, [])
@@ -27,8 +33,8 @@ const EmployerDashboard = () => {
       {/* Overview Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <DashboardCard title="Total Job Listings" value={totalListedJobs} icon={<Briefcase size={24} />} color="bg-gradient-to-r from-blue-400 to-blue-600" />
-        <DashboardCard title="Active Applications" value="34" icon={<Users size={24} />} color="bg-gradient-to-r from-yellow-400 to-yellow-600" />
-        <DashboardCard title="Shortlisted Candidates" value="8" icon={<CheckCircle size={24} />} color="bg-gradient-to-r from-green-400 to-green-600" />
+        <DashboardCard title="Active Applications" value={totalApplicationsReceived} icon={<Users size={24} />} color="bg-gradient-to-r from-yellow-400 to-yellow-600" />
+        <DashboardCard title="Shortlisted Candidates" value={totalShortlistedCandidates} icon={<CheckCircle size={24} />} color="bg-gradient-to-r from-green-400 to-green-600" />
         {/* <DashboardCard title="Hired Employees" value="3" icon={<User Plus size={24} />} color="bg-gradient-to-r from-purple-400 to-purple-600" /> */}
       </div>
 

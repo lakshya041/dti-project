@@ -1,12 +1,16 @@
+import { useEffect } from "react";
 import Topbar from "./navbar";
 import Sidebar from "./sidebar";
 import { useNavigate } from "react-router-dom";
 
 function Layout({ children }) {
   const navigate = useNavigate();
-  if(document.cookie==""){
-    navigate("/Login")
-  }
+  useEffect(() => {
+    if(document.cookie==""){
+      navigate("/Login")
+    }
+
+  },[])
   return (
     <div className="flex h-screen bg-gray-100 overflow-hidden">
       <Sidebar />

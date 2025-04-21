@@ -6,7 +6,7 @@ import bCrypt from "bcrypt";
 const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET;
 const JWT_SECRET = process.env.JWT_SECRET;
 import { z } from "zod";
-import { employerModel } from "../db.js";
+import { employerDashboardModel, employerModel } from "../db.js";
 const employerLoginRouter = Router()
 const employerSignupRouter = Router()
 
@@ -20,7 +20,7 @@ employerLoginRouter.post("/", async function (req, res) {
 
     if (dbRes) {
 
-        const comparePassword = await bCrypt.compare(password, dbRes.password)
+        const comparePassword = bCrypt.compare(password, dbRes.password)
         const username = dbRes.username
         if (comparePassword) {
 
@@ -61,6 +61,14 @@ employerSignupRouter.post("/", async function (req, res) {
             username: username,
             password: hashedPassword,
             email: email
+        })
+
+        employerDashboardModel.create({
+            username: username,
+            totalJobsPosted: 0,
+            totalApplicationsReceived: 0,
+            totalShortlisted: 0,
+            totalHired: 0
         })
 
         const token = jwt.sign({

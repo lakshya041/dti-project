@@ -42,6 +42,7 @@ addJobsRouter.post("/", async function (req, res) {
             max: maxsalaryRangeInt,
         },
         experienceLevel: req.body.experienceLevel,
+        postedDate: new Date()
         
     })
     if (jobExist) {

@@ -12,6 +12,7 @@ import { addJobsRouter, loadAllJobsRouter, loadAlluserJobsRouter, removeJobsRout
 import { applyJobsRouter } from "./jobs/applied.js"
 import { employeeVerificationRouter } from "./verification/employee.js"
 import { employerVerificationRouter } from "./verification/employer.js"
+import { dashboardRouter } from "./pages/dashboard.js"
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI || "";
 
@@ -26,6 +27,7 @@ app.use("/applyJobs", applyJobsRouter)
 app.use("/employeeVerification", employeeVerificationRouter)
 app.use("/employerVerification", employerVerificationRouter)
 app.use("/loadAllJobs", loadAllJobsRouter)
+app.use('/dahboarddata', dashboardRouter)
 
 async function main() {
 

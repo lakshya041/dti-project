@@ -45,7 +45,6 @@ const employerSchema = new Schema({
     username: String,
     email: String,
     password: String,
-
 });
 
 const jobsSchema = new Schema({
@@ -61,7 +60,7 @@ const jobsSchema = new Schema({
         max: Number
       },
     experienceLevel: String,
-    // postedDate: Date
+    postedDate: Date
 })
 
 const employerDashboardSchema = new Schema({
