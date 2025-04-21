@@ -8,7 +8,7 @@ dotenv.config();
 import mongoose from "mongoose"
 import { employeeLoginRouter, employeeSignupRouter } from "./auth/employee.js"
 import { employerLoginRouter, employerSignupRouter } from "./auth/employer.js"
-import { addJobsRouter, loadAllRouter, removeJobsRouter } from "./jobs/list.js"
+import { addJobsRouter, loadAllJobsRouter, loadAlluserJobsRouter, removeJobsRouter } from "./jobs/list.js"
 import { applyJobsRouter } from "./jobs/applied.js"
 import { employeeVerificationRouter } from "./verification/employee.js"
 import { employerVerificationRouter } from "./verification/employer.js"
@@ -21,10 +21,11 @@ app.use("/employerlogin", employerLoginRouter)
 app.use("/employersignup", employerSignupRouter)
 app.use("/addjobs", addJobsRouter)
 app.use("/removejobs", removeJobsRouter)
-app.use("/loadalljobs", loadAllRouter)
+app.use("/loadAlluserJobs", loadAlluserJobsRouter)
 app.use("/appliedjobs", applyJobsRouter)
 app.use("/employeeVerification", employeeVerificationRouter)
 app.use("/employerVerification", employerVerificationRouter)
+app.use("/loadAllJobs", loadAllJobsRouter)
 
 async function main() {
 

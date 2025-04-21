@@ -6,7 +6,8 @@ const JWT_SECRET = process.env.JWT_SECRET;
 import { z } from "zod";
 const addJobsRouter = Router()
 const removeJobsRouter = Router()
-const loadAllRouter = Router()
+const loadAlluserJobsRouter = Router()
+const loadAllJobsRouter = Router()
 import {jobsModel } from "../db.js";
 
 function generateRandomString() {
@@ -99,7 +100,7 @@ removeJobsRouter.post("/", async function (req, res) {
 
 })
 
-loadAllRouter.get("/", async function (req, res) {
+loadAlluserJobsRouter.get("/", async function (req, res) {
     const username = req.headers.username
     const jobs = await jobsModel.find({
         username: username
@@ -110,8 +111,17 @@ loadAllRouter.get("/", async function (req, res) {
     })
 })
 
+loadAllJobsRouter.get("/", async function(req,res){
+    const jobs = await jobsModel.find({})
+    res.json({
+        message: "got jobs",
+        jobs: jobs
+    })
+})
+
 export {
     addJobsRouter,
     removeJobsRouter,
-    loadAllRouter
+    loadAlluserJobsRouter,
+    loadAllJobsRouter
 }
