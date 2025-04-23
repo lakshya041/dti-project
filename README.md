@@ -36,11 +36,10 @@ This platform bridges the gap between **employers** looking to hire skilled work
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: (Add your framework here, e.g., React, Vue, etc.)
+- **Frontend**: ReactJs
 - **Backend**: Node.js / Express
-- **Database**: MongoDB / PostgreSQL
+- **Database**: MongoDB
 - **Authentication**: JWT / bcrypt
-- **Messaging System**: (Add if applicable)
 
 ---
 
