@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { Home, Ticket, Repeat, Wrench, User, Settings, LogOut, FileText, AlertCircle, BarChart2 } from 'lucide-react';
 function Sidebar() {
   const menuItems = [
-    { href: '/', label: 'Dashboard', icon: <Home size={18} /> },
-    { href: '/applications', label: 'Applications', icon: <FileText size={18} /> },
-    { href: '/manage', label: 'Manage', icon: <Wrench size={18} /> }, // Replace Complaints
-    { href: '/reports', label: 'Reports', icon: <BarChart2 size={18} /> }, // Replace Reports
-    { href: '/faq', label: "FAQ's", icon: <User size={18} /> },
-    { href: '/settings', label: 'Settings', icon: <Settings size={18} /> },
+    { href: '/employer/', label: 'Dashboard', icon: <Home size={18} /> },
+    { href: '/employer/applications', label: 'Applications', icon: <FileText size={18} /> },
+    { href: '/employer/manage', label: 'Manage', icon: <Wrench size={18} /> }, // Replace Complaints
+    { href: '/employer/reports', label: 'Reports', icon: <BarChart2 size={18} /> }, // Replace Reports
+    { href: '/employer/faq', label: "FAQ's", icon: <User size={18} /> },
+    { href: '/employer/settings', label: 'Settings', icon: <Settings size={18} /> },
 ];
 
     // useEffect(() => {
@@ -21,7 +21,7 @@ function Sidebar() {
     return (
         <div className="w-64 h-screen bg-[#10141f] text-white flex flex-col shadow-lg">
             <div className="text-2xl font-bold text-center py-5 border-b border-r border-gray-700 tracking-wide">
-                Trade Tickets
+                Just Employed
             </div>
             <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-1">
                 {menuItems.map((item) => (
