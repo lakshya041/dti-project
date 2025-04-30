@@ -11,6 +11,7 @@ import Home from "./pages/home";
 import AuthForm from "./pages/Login";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import ManageDashboard from "./pages/manage/ApplicationDashboard";
+import ReportsDashboard from "./pages/reports/FAQDashboard";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Route path="/" element={<Layout><DashboardPage /></Layout>} />
         <Route path="/applications" element={<Layout><ApplicationDashboard /></Layout>} />
         <Route path="/manage" element={<Layout><ManageDashboard /></Layout>} />
-        <Route path="/reports" element={<Layout><ReportsAndAnalysis /></Layout>} />
+        <Route path="/reports" element={<Layout><ReportsDashboard /></Layout>} />
         <Route path="/faq" element={<Layout><FAQSection /></Layout>} />
         <Route path="/settings" element={<Layout><Settings /></Layout>} />
       </Routes>
