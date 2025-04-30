@@ -1,43 +1,54 @@
-import { Link } from "react-router-dom";
-import { 
-  LayoutDashboard, Briefcase, BarChart, MessageCircleWarning, HelpCircle, Settings, LogOut 
-} from "lucide-react";
+import React, { useEffect } from 'react';
+import { Home, Ticket, Repeat, MessageSquare, User, Settings, LogOut, FileText, AlertCircle, BarChart2 } from 'lucide-react';
+function Sidebar() {
+  const menuItems = [
+    { href: '/', label: 'Dashboard', icon: <Home size={18} /> },
+    { href: '/applications', label: 'Applications', icon: <FileText size={18} /> },
+    { href: '/complaints', label: 'Complaints', icon: <AlertCircle size={18} /> }, // Replace Complaints
+    { href: '/reports', label: 'Reports', icon: <BarChart2 size={18} /> }, // Replace Reports
+    { href: '/faq', label: "FAQ's", icon: <User size={18} /> },
+    { href: '/settings', label: 'Settings', icon: <Settings size={18} /> },
+];
 
-const Sidebar = () => {
-  return (
-    <div className="h-screen w-64 bg-gray-900 text-white flex flex-col justify-between p-5 shadow-lg">
-      
-      {/* Logo Section */}
-      <div>
-        <h2 className="text-2xl font-bold flex items-center gap-2 text-green-400">
-          <Briefcase size={28} /> Just Employed
-        </h2>
+    // useEffect(() => {
+    //     const token = localStorage.getItem('token');
+    //     if (!token) {
+    //         window.location.href = '/auth';
+    //     }
+    // }
+    // , []);
 
-        {/* Navigation Links */}
-        <nav className="mt-6 space-y-2">
-          <SidebarItem to="/" icon={<LayoutDashboard size={20} />} label="Dashboard" />
-          <SidebarItem to="/applications" icon={<Briefcase size={20} />} label="Applications" />
-          <SidebarItem to="/reports" icon={<BarChart size={20} />} label="Reports & Analytics" />
-          <SidebarItem to="/complaints" icon={<MessageCircleWarning size={20} />} label="Complaints" />
-          <SidebarItem to="/qna" icon={<HelpCircle size={20} />} label="Q&A" />
-          <SidebarItem to="/settings" icon={<Settings size={20} />} label="Settings" />
-        </nav>
-      </div>
-
-      {/* Logout Button */}
-      <SidebarItem to="/logout" icon={<LogOut size={20} className="text-red-400" />} label="Logout" textClass="text-red-400" />
-    </div>
-  );
-};
-
-const SidebarItem = ({ to, icon, label, textClass = "text-gray-300" }) => (
-  <Link
-    to={to}
-    className={`flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-700 transition ${textClass}`}
-  >
-    {icon}
-    <span>{label}</span>
-  </Link>
-);
+    return (
+        <div className="w-64 h-screen bg-[#10141f] text-white flex flex-col shadow-lg">
+            <div className="text-2xl font-bold text-center py-5 border-b border-r border-gray-700 tracking-wide">
+                Trade Tickets
+            </div>
+            <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-1">
+                {menuItems.map((item) => (
+                    <a
+                        key={item.href}
+                        href={item.href}
+                        className="flex items-center gap-3 px-4 py-2 rounded-md hover:bg-[#1c2230] transition duration-200"
+                    >
+                        {item.icon}
+                        <span>{item.label}</span>
+                    </a>
+                ))}
+            </nav>
+            <div className="p-4 border-t border-gray-700">
+                <a
+                    onClick={() => {
+                        localStorage.removeItem('token');
+                        window.location.href = '/auth';
+                    }}
+                    className="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-md text-white font-medium transition"
+                >
+                    <LogOut size={18} />
+                    Logout
+                </a>
+            </div>
+        </div>
+    );
+}
 
 export default Sidebar;

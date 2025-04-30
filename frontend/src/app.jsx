@@ -5,7 +5,7 @@ import Applications from "./pages/applications";
 import ReportsAndAnalysis from "./pages/reports";
 import Requests from "./pages/requests";
 import Complaints from "./pages/complaints";
-import Settings from "./pages/settings";
+import Settings from "./pages/settings/InputDesign";
 import Home from "./pages/home";
 import AuthForm from "./pages/Login";
 
@@ -19,7 +19,7 @@ function App() {
         <Route path="/applications" element={<Layout><Applications /></Layout>} />
         <Route path="/complaints" element={<Layout><Complaints /></Layout>} />
         <Route path="/reports" element={<Layout><ReportsAndAnalysis /></Layout>} />
-        <Route path="/qna" element={<Layout><Requests /></Layout>} />
+        <Route path="/faq" element={<Layout><Requests /></Layout>} />
         <Route path="/settings" element={<Layout><Settings /></Layout>} />
       </Routes>
     </Router>
