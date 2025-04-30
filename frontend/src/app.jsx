@@ -4,7 +4,7 @@ import Dashboard from "./pages/dashboard";
 import Applications from "./pages/applications";
 import ApplicationDashboard from "./pages/applications/ApplicationDashboard";
 import ReportsAndAnalysis from "./pages/reports";
-import Requests from "./pages/requests";
+import FAQSection from "./pages/faq";
 import Complaints from "./pages/complaints";
 import Settings from "./pages/settings/InputDesign";
 import Home from "./pages/home";
@@ -21,7 +21,7 @@ function App() {
         <Route path="/applications" element={<Layout><ApplicationDashboard /></Layout>} />
         <Route path="/complaints" element={<Layout><Complaints /></Layout>} />
         <Route path="/reports" element={<Layout><ReportsAndAnalysis /></Layout>} />
-        <Route path="/faq" element={<Layout><Requests /></Layout>} />
+        <Route path="/faq" element={<Layout><FAQSection /></Layout>} />
         <Route path="/settings" element={<Layout><Settings /></Layout>} />
       </Routes>
     </Router>
