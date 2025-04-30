@@ -10,6 +10,7 @@ import Settings from "./pages/settings/InputDesign";
 import Home from "./pages/home";
 import AuthForm from "./pages/Login";
 import DashboardPage from "./pages/dashboard/DashboardPage";
+import ManageDashboard from "./pages/manage/ApplicationDashboard";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/Login" element={<AuthForm/>} />
         <Route path="/" element={<Layout><DashboardPage /></Layout>} />
         <Route path="/applications" element={<Layout><ApplicationDashboard /></Layout>} />
-        <Route path="/complaints" element={<Layout><Complaints /></Layout>} />
+        <Route path="/manage" element={<Layout><ManageDashboard /></Layout>} />
         <Route path="/reports" element={<Layout><ReportsAndAnalysis /></Layout>} />
         <Route path="/faq" element={<Layout><FAQSection /></Layout>} />
         <Route path="/settings" element={<Layout><Settings /></Layout>} />

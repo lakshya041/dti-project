@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { Home, Ticket, Repeat, MessageSquare, User, Settings, LogOut, FileText, AlertCircle, BarChart2 } from 'lucide-react';
+import { Home, Ticket, Repeat, Wrench, User, Settings, LogOut, FileText, AlertCircle, BarChart2 } from 'lucide-react';
 function Sidebar() {
   const menuItems = [
     { href: '/', label: 'Dashboard', icon: <Home size={18} /> },
     { href: '/applications', label: 'Applications', icon: <FileText size={18} /> },
-    { href: '/complaints', label: 'Complaints', icon: <AlertCircle size={18} /> }, // Replace Complaints
+    { href: '/manage', label: 'Manage', icon: <Wrench size={18} /> }, // Replace Complaints
     { href: '/reports', label: 'Reports', icon: <BarChart2 size={18} /> }, // Replace Reports
     { href: '/faq', label: "FAQ's", icon: <User size={18} /> },
     { href: '/settings', label: 'Settings', icon: <Settings size={18} /> },
