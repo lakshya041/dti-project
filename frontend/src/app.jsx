@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
 import Dashboard from "./pages/dashboard";
 import Applications from "./pages/applications";
+import ApplicationDashboard from "./pages/applications/ApplicationDashboard";
 import ReportsAndAnalysis from "./pages/reports";
 import Requests from "./pages/requests";
 import Complaints from "./pages/complaints";
@@ -17,7 +18,7 @@ function App() {
         <Route path="/home" element={<Home/>} />
         <Route path="/Login" element={<AuthForm/>} />
         <Route path="/" element={<Layout><DashboardPage /></Layout>} />
-        <Route path="/applications" element={<Layout><Applications /></Layout>} />
+        <Route path="/applications" element={<Layout><ApplicationDashboard /></Layout>} />
         <Route path="/complaints" element={<Layout><Complaints /></Layout>} />
         <Route path="/reports" element={<Layout><ReportsAndAnalysis /></Layout>} />
         <Route path="/faq" element={<Layout><Requests /></Layout>} />
