@@ -8,6 +8,7 @@ import Complaints from "./pages/complaints";
 import Settings from "./pages/settings/InputDesign";
 import Home from "./pages/home";
 import AuthForm from "./pages/Login";
+import DashboardPage from "./pages/dashboard/DashboardPage";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/home" element={<Home/>} />
         <Route path="/Login" element={<AuthForm/>} />
-        <Route path="/" element={<Layout><Dashboard /></Layout>} />
+        <Route path="/" element={<Layout><DashboardPage /></Layout>} />
         <Route path="/applications" element={<Layout><Applications /></Layout>} />
         <Route path="/complaints" element={<Layout><Complaints /></Layout>} />
         <Route path="/reports" element={<Layout><ReportsAndAnalysis /></Layout>} />
