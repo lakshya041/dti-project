@@ -30,7 +30,7 @@ export default function AuthForm() {
     if (data.message === "login Success") {
        localStorage.setItem("token", data.token);
       localStorage.setItem("role", role=="employeelogin" ? "employee" : "employer");
-      role=="employerlogin"? navigate("/employer"): navigate("/employee");
+      role=="employersignup"? navigate("/employer"): navigate("/employee");
     }
   }
 
@@ -52,7 +52,7 @@ export default function AuthForm() {
     if (data.message === "signup Success") {
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", role=="employersignup" ? "employer" : "employee");
-      role=="employeesignup"? navigate("/employee"): navigate("/employer");
+      role=="employeelogin"? navigate("/employee"): navigate("/employer");
     }
   }
 
