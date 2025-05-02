@@ -11,7 +11,7 @@ export default function AuthForm() {
   const signupPasswordRef = useRef()
 
   async function signinHandler(){
-    const res = await fetch("http://localhost:3000/employerlogin", {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employerlogin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export default function AuthForm() {
   }
 
   async function signupHandler(){
-    const res = await fetch("http://localhost:3000/employersignup", {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employersignup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

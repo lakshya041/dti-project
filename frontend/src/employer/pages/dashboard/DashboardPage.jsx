@@ -36,7 +36,7 @@ function DashboardPage() {
   ]);
   useEffect(() => {
     const fetchdata = async () => {
-      const res = await fetch("http://localhost:3000/loadAlluserJobs/", {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/loadAlluserJobs/`, {
         method: "GET",
         headers: {
           token: localStorage.getItem("token"),
@@ -55,7 +55,7 @@ function DashboardPage() {
 
   useEffect(() => {
     async function fetchApplications() {
-      const res = await fetch("http://localhost:3000/applyJobs/employer/applications", {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/applyJobs/employer/applications`, {
         method: "GET",
         headers: {
           token: localStorage.getItem("token"),

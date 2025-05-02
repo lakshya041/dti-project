@@ -10,7 +10,7 @@ const EmployerDashboard = () => {
   useEffect(() => {
 
     async function main() {
-      const res = await fetch("http://localhost:3000/dahboarddata", {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/dahboarddata`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

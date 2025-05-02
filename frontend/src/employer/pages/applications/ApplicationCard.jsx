@@ -20,7 +20,7 @@ function ApplicationCard({ application, updateStatus }) {
               variant="accept"
               onClick={async () => {
                 console.log("Accepting application", application);
-                const res = await fetch("http://localhost:3000/applyJobs/select", {
+                const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/applyJobs/select`, {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -40,7 +40,7 @@ function ApplicationCard({ application, updateStatus }) {
               variant="reject"
               onClick={async () => {
                 console.log("Accepting application", application);
-                const res = await fetch("http://localhost:3000/applyJobs/reject", {
+                const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/applyJobs/reject`, {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",

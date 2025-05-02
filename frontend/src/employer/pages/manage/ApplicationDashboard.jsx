@@ -11,7 +11,7 @@ function ManageDashboard() {
   useEffect(() => {
     async function fetchApplications() {
       try {
-        const res = await fetch("http://localhost:3000/applyJobs/selected", {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/applyJobs/selected`, {
           method: "GET",
           headers: {
             token: localStorage.getItem("token"),

@@ -15,7 +15,7 @@ export default function AuthForm() {
   async function signinHandler() {
     const role = loginRoleRef.current.value;
 
-    const res = await fetch(`http://localhost:3000/${role}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/${role}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export default function AuthForm() {
 
   async function signupHandler() {
     const role = signupRoleRef.current.value;
-    const res = await fetch(`http://localhost:3000/${role}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/${role}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

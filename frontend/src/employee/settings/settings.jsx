@@ -9,7 +9,7 @@ export default function SettingsContent() {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch("http://localhost:3000/employee/profile", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/employee/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
