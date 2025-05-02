@@ -1,7 +1,7 @@
 // ApplyJobsPage.jsx
 "use client";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import jobImg from "../../public/job.png";
 // StatusBadge
 function StatusBadge({ status }) {
   const getStatusStyles = () => {
@@ -45,21 +45,23 @@ function SkillTag({ children }) {
 
 // ApplicationCard (no action buttons for employee)
 function ApplicationCard({ application }) {
+  console.log(application);
   return (
     <article className="flex gap-6 p-6 border-b border-solid border-b-white/10 border-b-opacity-10">
       <img
         className="object-cover w-12 h-12 rounded-full"
-        src={application.avatar}
+        src={jobImg}
         alt={`${application.name}'s profile`}
       />
       <div className="flex-1">
         <div className="flex justify-between mb-2">
-          <h3 className="text-base font-semibold">{application.name}</h3>
+          <h3 className=" text-base font-semibold">{application.description}</h3>
         </div>
         <div className="flex gap-6 text-sm text-zinc-400">
-          <div>{application.role}</div>
-          <div>{application.experience}</div>
+          <div>{application.type}</div>
+          <div>{application.experienceLevel}</div>
           <div>{application.location}</div>
+          <div>{application.organization}</div>
         </div>
         <div className="flex gap-2 mt-3">
           {application.skills?.map((skill) => (
@@ -127,50 +129,36 @@ function ApplyJobsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
 
-  const [applications] = useState([
-    {
-      id: 1,
-      name: "Sarah Wilson",
-      role: "Senior Frontend Developer",
-      status: "Shortlisted",
-      appliedDate: "2024-02-10",
-      experience: "8 years",
-      location: "San Francisco, CA",
-      skills: ["React", "TypeScript", "Node.js"],
-      avatar:
-        "https://images.pexels.com/photos/3993457/pexels-photo-3993457.jpeg",
-    },
-    {
-      id: 2,
-      name: "Michael Chen",
-      role: "DevOps Engineer",
-      status: "Under Review",
-      appliedDate: "2024-02-09",
-      experience: "5 years",
-      location: "Seattle, WA",
-      skills: ["AWS", "Kubernetes", "Docker"],
-      avatar:
-        "https://images.pexels.com/photos/17311570/pexels-photo-17311570.jpeg",
-    },
-    {
-      id: 3,
-      name: "Emma Davis",
-      role: "Product Designer",
-      status: "New",
-      appliedDate: "2024-02-08",
-      experience: "6 years",
-      location: "New York, NY",
-      skills: ["Figma", "UI/UX", "Design Systems"],
-      avatar:
-        "https://images.pexels.com/photos/31793529/pexels-photo-31793529.jpeg",
-    },
-  ]);
+  const [applications, setApplications] = useState([]);
+
+    useEffect(() => {
+      async function fetchApplications() {
+        const token = localStorage.getItem("token");
+        const res = await fetch("http://localhost:3000/applyJobs", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "token": `${token}`,
+          },
+        });
+        const data = await res.json();
+        if (data.length > 0) {
+          setApplications(data);
+        } else {
+          setApplications([]);
+        }
+      }
+      fetchApplications();
+    }, []);
+    useEffect(() => {
+      console.log("Applications updated:", applications);
+    }, [applications]);
 
   const filteredApplications = applications.filter((app) => {
     const matchesSearch =
       !searchQuery ||
-      app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      app.role.toLowerCase().includes(searchQuery.toLowerCase());
+      app.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      app.organization.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesFilter = filterStatus === "all" || app.status === filterStatus;
     return matchesSearch && matchesFilter;
   });

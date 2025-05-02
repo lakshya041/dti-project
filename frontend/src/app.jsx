@@ -9,7 +9,7 @@ import DashboardPage from "./employer/pages/dashboard/DashboardPage";
 import ManageDashboard from "./employer/pages/manage/ApplicationDashboard";
 import ReportsDashboard from "./employer/pages/reports/FAQDashboard";
 import EmployeeDashboardPage from "./employee/dashboard/EmployeeDashboardPage";
-import EmployeeManageDashboard from "./employee/manage/ApplicationDashboard";
+import EmployeeManageDashboard from "./employee/apply/ApplicationDashboard";
 import EmployeeReportsDashboard from "./employee/reports/FAQDashboard";
 import EmployeeFAQSection from "./employee/faq/FAQSection";
 import EmployeeSettingsPage from "./employee/settings/InputDesign";

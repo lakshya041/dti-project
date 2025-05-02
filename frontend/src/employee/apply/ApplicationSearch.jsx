@@ -12,7 +12,7 @@ function ApplicationSearch({
       <div className="relative">
         <input
           type="search"
-          placeholder="Search employees..."
+          placeholder="Search jobs..."
           className="px-3 py-2 pl-9 text-sm rounded-md border border-solid bg-black/6 bg-opacity-10 border-white/10 text-white w-[300px] outline-none"
           value={searchQuery}
           onInput={(event) => setSearchQuery(event.target.value)}

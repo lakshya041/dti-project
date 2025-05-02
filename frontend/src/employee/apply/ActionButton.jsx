@@ -5,11 +5,11 @@ function ActionButton({ variant, onClick, children }) {
     "px-3 py-1.5 text-sm rounded-md cursor-pointer border-none text-white";
 
   const variantClasses =
-    "accept" != "accept" ? "bg-green-700" : "bg-white/10 ";
+    "accept" == "accept" ? "bg-green-700" : "bg-white/10 ";
 
   return (
-    <button className={`${baseClasses} ${variantClasses}`} onClick={onClick}>
-      View Profile
+    <button  className={`${baseClasses} ${variantClasses}`} onClick={onClick}>
+      Apply
     </button>
   );
 }

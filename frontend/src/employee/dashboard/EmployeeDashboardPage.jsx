@@ -5,32 +5,33 @@ import StatCard from "./StatCard";
 import JobCard from "./JobCard";
 import ApplicationCard from "./ApplicationCard";
 import InterviewCard from "./InterviewCard";
+import { useEffect } from "react";
 
 function EmployeeDashboardPage() {
   const [appliedJobs, setAppliedJobs] = useState(() => 24);
   const [activeApplications, setActiveApplications] = useState(() => 12);
   const [interviewsScheduled, setInterviewsScheduled] = useState(() => 3);
 
-  const [myApplications, setMyApplications] = useState(() => [
-    {
-      id: 1,
-      name: "Senior Frontend Developer",
-      role: "TechCorp",
-      status: "Shortlisted",
-    },
-    {
-      id: 2,
-      name: "DevOps Engineer",
-      role: "InnoTech",
-      status: "Under Review",
-    },
-    {
-      id: 3,
-      name: "Product Designer",
-      role: "Designify",
-      status: "New",
-    },
-  ]);
+  const [myApplications, setMyApplications] = useState(() => []);
+
+  useEffect(() => {
+    async function fetchApplications() {
+      const res = await fetch("http://localhost:3000/applyJobs", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "token": `${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      setMyApplications(data);
+
+    }
+    fetchApplications();
+  }, []);
+  useEffect(() => {
+    console.log("Applications updated:", myApplications);
+  }, [myApplications]);
 
   const [upcomingInterviews, setUpcomingInterviews] = useState(() => [
     {
@@ -56,8 +57,8 @@ function EmployeeDashboardPage() {
   return (
     <main className="p-8 min-h-screen text-white bg-neutral-900">
       <section className="grid gap-6 mb-8 grid-cols-[repeat(3,1fr)]">
-        <StatCard title="Jobs Applied" value={appliedJobs} />
-        <StatCard title="Active Applications" value={activeApplications} />
+        <StatCard title="Jobs Applied" value={myApplications.length} />
+        <StatCard title="Active Applications" value={myApplications.length} />
         <StatCard title="Interviews Scheduled" value={interviewsScheduled} />
       </section>
 
@@ -65,7 +66,8 @@ function EmployeeDashboardPage() {
         <article className="p-6 rounded-xl border border-solid border-white/10">
           <h3 className="mb-4 text-lg">My Applications</h3>
           <div className="flex flex-col gap-3">
-            {myApplications.map((application) => (
+            {myApplications.map((application,index) => (
+              index<3 && 
               <ApplicationCard key={application.id} application={application} />
             ))}
           </div>

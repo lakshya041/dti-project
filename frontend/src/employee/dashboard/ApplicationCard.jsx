@@ -15,8 +15,12 @@ function ApplicationCard({ application }) {
   return (
     <article className="flex justify-between items-center p-3 rounded-lg bg-[#FFFFFF]/3">
       <div>
-        <h4 className="mb-1 text-base">{application.name}</h4>
-        <p className="text-sm text-zinc-400">{application.role}</p>
+        <h4 className="mb-1 text-base">{application.description}</h4>
+        <div className="flex gap-[10px]">
+        <p className="text-sm text-zinc-400">{application.type}</p>
+        <p className="text-sm text-zinc-400">{application.location}</p>
+        <p className="text-sm text-zinc-400">{application.organization}</p>
+        </div>
       </div>
       <span
         className="px-3 py-1 text-sm rounded-xl"
