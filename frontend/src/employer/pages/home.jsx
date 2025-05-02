@@ -2,7 +2,7 @@ import { Inbox, Phone } from 'lucide-react';
 
 const Home = () => {
   function tologin() {
-    window.location.href = "/Login"
+    window.location.href = "/auth"
   }
   return (
     <div className="bg-[#3a2a25] min-h-screen flex justify-center bg-opacity-90 bg-[url('data:image/svg+xml,...')] bg-fixed">

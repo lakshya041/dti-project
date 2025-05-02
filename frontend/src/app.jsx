@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/home" element={<Home/>} />
+        <Route path="/" element={<Home/>} />
         <Route path="/auth" element={<AuthForm/>} />
         <Route path="/employer/" element={<Layout><DashboardPage /></Layout>} />
         <Route path="/employer/applications" element={<Layout><ApplicationDashboard /></Layout>} />
