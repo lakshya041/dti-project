@@ -5,74 +5,33 @@ import StatCard from "./StatCard";
 import JobCard from "./JobCard";
 import ApplicationCard from "./ApplicationCard";
 import InterviewCard from "./InterviewCard";
+import { useEffect } from "react";
 
 function DashboardPage() {
-  const [totalJobs, setTotalJobs] = useState(() => 24);
+  const [totalJobs, setTotalJobs] = useState(0);
   const [activeApplications, setActiveApplications] = useState(() => 156);
   const [shortlistedCandidates, setShortlistedCandidates] = useState(() => 45);
+  const [recentJobs, setRecentJobs] = useState(() => []);
+  const [recentApplications, setRecentApplications] = useState(() => []);
+  const [upcomingInterviews, setUpcomingInterviews] = useState(() => []);
 
-  const [recentJobs, setRecentJobs] = useState(() => [
-    {
-      id: 1,
-      title: "Senior Frontend Developer",
-      applications: 34,
-      posted: "2d ago",
-    },
-    {
-      id: 2,
-      title: "DevOps Engineer",
-      applications: 28,
-      posted: "3d ago",
-    },
-    {
-      id: 3,
-      title: "Product Designer",
-      applications: 42,
-      posted: "5d ago",
-    },
-  ]);
-
-  const [recentApplications, setRecentApplications] = useState(() => [
-    {
-      id: 1,
-      name: "Sarah Wilson",
-      role: "Senior Frontend Developer",
-      status: "Shortlisted",
-    },
-    {
-      id: 2,
-      name: "Michael Chen",
-      role: "DevOps Engineer",
-      status: "Under Review",
-    },
-    {
-      id: 3,
-      name: "Emma Davis",
-      role: "Product Designer",
-      status: "New",
-    },
-  ]);
-
-  const [upcomingInterviews, setUpcomingInterviews] = useState(() => [
-    {
-      id: 1,
-      candidate: "Sarah Wilson",
-      role: "Senior Frontend Developer",
-      time: "Today, 2:00 PM",
-    },
-    {
-      id: 2,
-      candidate: "James Miller",
-      role: "DevOps Engineer",
-      time: "Tomorrow, 11:00 AM",
-    },
-    {
-      id: 3,
-      candidate: "Lisa Anderson",
-      role: "Product Designer",
-      time: "Feb 15, 3:30 PM",
-    },
-  ]);
+  useEffect(() => {
+    const fetchdata = async () => {
+      const res = await fetch("http://localhost:3000/loadAlluserJobs/", {
+        method: "GET",
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      });
+      const data = await res.json();
+      if (data.message === "got jobs") {
+        setTotalJobs(data.jobs.length);
+        setActiveApplications(data.jobs.length)
+        setRecentJobs(data.jobs.slice(0, 3));
+      }
+    };
+    fetchdata();
+  }, []);
 
   return (
     <main className="p-8 min-h-screen text-white bg-neutral-900">

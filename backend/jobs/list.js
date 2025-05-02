@@ -37,10 +37,6 @@ addJobsRouter.post("/", async function (req, res) {
         location: req.body.location,
         organization: req.body.organization,
         description: req.body.description,
-        salaryRange: {
-            min: minsalaryRangeInt,
-            max: maxsalaryRangeInt,
-        },
         experienceLevel: req.body.experienceLevel,
         postedDate: new Date()
         
@@ -60,10 +56,6 @@ addJobsRouter.post("/", async function (req, res) {
         location: req.body.location,
         organization: req.body.organization,
         description: req.body.description,
-        salaryRange: {
-            min: minsalaryRangeInt,
-            max: maxsalaryRangeInt,
-        },
         experienceLevel: req.body.experienceLevel,
 
     })
@@ -113,13 +105,6 @@ loadAlluserJobsRouter.get("/", async function (req, res) {
     })
 })
 
-loadAllJobsRouter.get("/", async function(req,res){
-    const jobs = await jobsModel.find({})
-    res.json({
-        message: "got jobs",
-        jobs: jobs
-    })
-})
 
 export {
     addJobsRouter,

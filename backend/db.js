@@ -48,7 +48,7 @@ const employerSchema = new Schema({
 });
 
 const jobsSchema = new Schema({
-    jobId:String,
+    jobId: String,
     username: String,
     openings: Number,
     type: String,
@@ -56,12 +56,12 @@ const jobsSchema = new Schema({
     organization: String,
     description: String,         
     salaryRange: {
-        min: Number,
-        max: Number
-      },
+        min: { type: Number, default: 0 },
+        max: { type: Number, default: 0 }
+    },
     experienceLevel: String,
-    postedDate: Date
-})
+    postedDate: { type: Date, default: Date.now }
+});
 
 const employerDashboardSchema = new Schema({
     username: String,

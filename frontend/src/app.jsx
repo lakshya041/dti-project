@@ -14,6 +14,7 @@ import EmployeeReportsDashboard from "./employee/reports/FAQDashboard";
 import EmployeeFAQSection from "./employee/faq/FAQSection";
 import EmployeeSettingsPage from "./employee/settings/InputDesign";
 import ApplyJobsPage from "./employee/applications";
+import AddJobs from "./employer/pages/addJobs/InputDesign";
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
         <Route path="/employer/reports" element={<Layout><ReportsDashboard /></Layout>} />
         <Route path="/employer/faq" element={<Layout><FAQSection /></Layout>} />
         <Route path="/employer/settings" element={<Layout><Settings /></Layout>} />
+        <Route path="/employer/addJobs" element={<Layout><AddJobs /></Layout>} />
+        
+        {/* Employee Routes */}
 
         <Route path="/employee/home" element={<Home/>} />
         <Route path="/employee/Login" element={<AuthForm/>} />
