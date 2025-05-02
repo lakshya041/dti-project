@@ -9,9 +9,13 @@ export default function AuthForm() {
   const signupNameRef = useRef()
   const signupEmailRef = useRef()
   const signupPasswordRef = useRef()
+  const loginRoleRef = useRef()
+  const signupRoleRef = useRef()
 
-  async function signinHandler(){
-    const res = await fetch("http://localhost:3000/employerlogin", {
+  async function signinHandler() {
+    const role = loginRoleRef.current.value;
+
+    const res = await fetch(`http://localhost:3000/${role}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,14 +28,15 @@ export default function AuthForm() {
 
     const data = await res.json();
     if (data.message === "login Success") {
-      document.cookie = `${data.token}; path=/;`;
-      console.log(data.token);
-      navigate("/");
+       localStorage.setItem("token", data.token);
+      localStorage.setItem("role", role=="employeelogin" ? "employee" : "employer");
+      role=="employersignup"? navigate("/employer"): navigate("/employee");
     }
   }
 
-  async function signupHandler(){
-    const res = await fetch("http://localhost:3000/employersignup", {
+  async function signupHandler() {
+    const role = signupRoleRef.current.value;
+    const res = await fetch(`http://localhost:3000/${role}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,8 +50,9 @@ export default function AuthForm() {
 
     const data = await res.json();
     if (data.message === "signup Success") {
-      document.cookie = `${data.token}; path=/;`;
-      navigate("/");
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", role=="employersignup" ? "employer" : "employee");
+      role=="employeelogin"? navigate("/employee"): navigate("/employer");
     }
   }
 
@@ -55,15 +61,13 @@ export default function AuthForm() {
       <div className="relative w-[800px] h-[500px] bg-white rounded-2xl shadow-2xl overflow-hidden">
         {/* Sliding Color Panel */}
         <div
-          className={`absolute top-0 w-1/2 h-full bg-gradient-to-br from-red-600 to-orange-500 transition-all duration-700 ease-in-out z-20 ${
-            isSignIn ? "left-0" : "left-1/2"
-          }`}
+          className={`absolute top-0 w-1/2 h-full bg-gradient-to-br from-red-600 to-orange-500 transition-all duration-700 ease-in-out z-20 ${isSignIn ? "left-0" : "left-1/2"
+            }`}
         >
           {/* Content for Sign In state */}
-          <div 
-            className={`absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white p-8 transition-all duration-700 ${
-              isSignIn ? "translate-x-0 opacity-100" : "-translate-x-full hidden opacity-0"
-            }`}
+          <div
+            className={`absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white p-8 transition-all duration-700 ${isSignIn ? "translate-x-0 opacity-100" : "-translate-x-full hidden opacity-0"
+              }`}
           >
             <h3 className="text-3xl font-bold mb-4">Welcome Back!</h3>
             <p className="text-center mb-6">
@@ -78,10 +82,9 @@ export default function AuthForm() {
           </div>
 
           {/* Content for Sign Up state */}
-          <div 
-            className={`absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white p-8 transition-all duration-700 ${
-              !isSignIn ? "translate-x-0 opacity-100" : "translate-x-full hidden opacity-0"
-            }`}
+          <div
+            className={`absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-white p-8 transition-all duration-700 ${!isSignIn ? "translate-x-0 opacity-100" : "translate-x-full hidden opacity-0"
+              }`}
           >
             <h3 className="text-3xl font-bold mb-4">Hello, Friend!</h3>
             <p className="text-center mb-6">
@@ -98,27 +101,30 @@ export default function AuthForm() {
 
         {/* Forms Container */}
         <div className="absolute top-0 left-0 w-full h-full">
-          <div className={`absolute w-full h-full transition-transform duration-700 ease-in-out ${
-            isSignIn ? "translate-x-100" : "-translate-x-1/2"
-          }`}>
-            {/* Sign In Form */}
-            <div className={`absolute left-0 w-1/2 h-full flex items-center justify-center transition-all duration-700 ${
-              isSignIn ? "opacity-100 z-10" : "opacity-0 z-0"
+          <div className={`absolute w-full h-full transition-transform duration-700 ease-in-out ${isSignIn ? "translate-x-100" : "-translate-x-1/2"
             }`}>
+            {/* Sign In Form */}
+            <div className={`absolute left-0 w-1/2 h-full flex items-center justify-center transition-all duration-700 ${isSignIn ? "opacity-100 z-10" : "opacity-0 z-0"
+              }`}>
               <div className="w-[300px]">
                 <h2 className="text-3xl font-bold text-gray-800 mb-8">Sign In</h2>
                 <input
-                ref={signInEmailRef}
-                  type="email"                  
+                  ref={signInEmailRef}
+                  type="email"
                   placeholder="Email"
                   className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
                 <input
-                ref={signInPasswordRef}
+                  ref={signInPasswordRef}
                   type="password"
                   placeholder="Password"
                   className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
+                <select ref={loginRoleRef} className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
+                  <option value="role" disabled selected>Select Role</option>
+                  <option value="employerlogin">Employer</option>
+                  <option value="employeelogin">Employee</option>
+                </select>
                 <div className="flex items-center justify-between w-full text-gray-700 text-sm py-6">
                   <label className="flex items-center">
                     <input type="checkbox" className="mr-2 accent-blue-500" />
@@ -128,37 +134,42 @@ export default function AuthForm() {
                     Forgot password?
                   </a>
                 </div>
-                <button  onClick={signinHandler} className="cursor-pointer w-full py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-lg hover:opacity-90 transition-opacity">
+                <button onClick={signinHandler} className="cursor-pointer w-full py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-lg hover:opacity-90 transition-opacity">
                   Sign In
                 </button>
               </div>
             </div>
 
             {/* Sign Up Form */}
-            <div className={`absolute left-1/2 w-1/2 h-full flex items-center justify-center transition-all duration-700 ${
-              !isSignIn ? "opacity-100 z-10" : "opacity-0 z-0"
-            }`}>
+            <div className={`absolute left-1/2 w-1/2 h-full flex items-center justify-center transition-all duration-700 ${!isSignIn ? "opacity-100 z-10" : "opacity-0 z-0"
+              }`}>
               <div className="w-[300px]">
                 <h2 className="text-3xl font-bold text-gray-800 mb-8">Create Account</h2>
                 <input
-                ref={signupNameRef}
+                  ref={signupNameRef}
                   type="text"
                   placeholder="Name"
                   className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
                 <input
-                ref={signupEmailRef}
+                  ref={signupEmailRef}
                   type="email"
                   placeholder="Email"
                   className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
                 <input
-                ref={signupPasswordRef}
+                  ref={signupPasswordRef}
                   type="password"
                   placeholder="Password"
                   className="w-full px-4 py-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
                 />
-                
+
+                <select ref={signupRoleRef} className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500">
+                  <option value="role" disabled selected>Select Role</option>
+                  <option value="employersignup">Employer</option>
+                  <option value="employeesignup">Employee</option>
+                </select>
+
                 <button onClick={signupHandler} className="cursor-pointer w-full py-3 bg-gradient-to-r from-red-500 to-orange-600 text-white rounded-lg hover:opacity-90 transition-opacity">
                   Sign Up
                 </button>

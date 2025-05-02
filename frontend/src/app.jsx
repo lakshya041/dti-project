@@ -19,8 +19,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/employer/home" element={<Home/>} />
-        <Route path="/employer/Login" element={<AuthForm/>} />
+        <Route path="/home" element={<Home/>} />
+        <Route path="/auth" element={<AuthForm/>} />
         <Route path="/employer/" element={<Layout><DashboardPage /></Layout>} />
         <Route path="/employer/applications" element={<Layout><ApplicationDashboard /></Layout>} />
         <Route path="/employer/manage" element={<Layout><ManageDashboard /></Layout>} />

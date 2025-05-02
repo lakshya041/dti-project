@@ -41,7 +41,7 @@ function Sidebar() {
                         localStorage.removeItem('token');
                         window.location.href = '/auth';
                     }}
-                    className="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-md text-white font-medium transition"
+                    className="cursor-pointer flex items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-md text-white font-medium transition"
                 >
                     <LogOut size={18} />
                     Logout
