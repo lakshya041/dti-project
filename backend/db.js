@@ -6,6 +6,9 @@ const employeeSchema = new Schema({
     email: String,
     password: String,
     appliedId: Array,
+    role: {type: String, default: "Electrician"},
+    experience: {type: Number, default: 0},
+    location: {type: String, default: "India"},
 
 });
 
@@ -45,7 +48,7 @@ const employerSchema = new Schema({
     username: String,
     email: String,
     password: String,
-    hiredEmployees : {type :Array, default: []},
+    hiredEmployees : Array,
 });
 
 const jobsSchema = new Schema({

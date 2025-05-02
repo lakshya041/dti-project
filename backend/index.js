@@ -6,8 +6,8 @@ app.use(express.json())
 import dotenv from "dotenv"
 dotenv.config();
 import mongoose from "mongoose"
-import { employeeLoginRouter, employeeSignupRouter } from "./auth/employee.js"
-import { employerLoginRouter, employerSignupRouter } from "./auth/employer.js"
+import { employeeLoginRouter, employeeSignupRouter, profileRouter } from "./auth/employee.js"
+import { employerLoginRouter, employerSignupRouter, profileRouter2 } from "./auth/employer.js"
 import { addJobsRouter, loadAllJobsRouter, loadAlluserJobsRouter, removeJobsRouter } from "./jobs/list.js"
 import { applyJobsRouter } from "./jobs/applied.js"
 import { employeeVerificationRouter } from "./verification/employee.js"
@@ -28,6 +28,8 @@ app.use("/employeeVerification", employeeVerificationRouter)
 app.use("/employerVerification", employerVerificationRouter)
 app.use("/loadAllJobs", loadAllJobsRouter)
 app.use('/dahboarddata', dashboardRouter)
+app.use("/employee", profileRouter)
+app.use("/employer", profileRouter2)
 
 async function main() {
 

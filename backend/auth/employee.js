@@ -3,12 +3,12 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 import bcrypt from "bcrypt";
-const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET;
 const JWT_SECRET = process.env.JWT_SECRET;
 import { z } from "zod";
 const employeeLoginRouter = Router()
 const employeeSignupRouter = Router()
 import { employeeModel } from "../db.js";
+const profileRouter = Router()
 
 employeeLoginRouter.post("/", async function (req, res) {
     const username = req.body.username
@@ -77,7 +77,36 @@ employeeSignupRouter.post("/", async function (req, res) {
 
 })
 
+profileRouter.get("/profile", async function (req, res) {
+    const token = req.headers.token
+    if (token) {
+        const decoded = jwt.verify(token, JWT_SECRET)
+        const username = decoded.username
+        const dbRes = await employeeModel.findOne({
+            username: username
+        })
+        if (dbRes) {
+            res.json({
+                message: "Profile data fetched successfully",
+                data: dbRes
+            })
+        }
+        else {
+            res.json({
+                message: "Profile data not found"
+            })
+        }
+    }
+    else {
+        res.json({
+            message: "Token not provided"
+        })
+    }
+}
+    )
+
 export {
     employeeLoginRouter,
-    employeeSignupRouter
+    employeeSignupRouter,
+    profileRouter
 }

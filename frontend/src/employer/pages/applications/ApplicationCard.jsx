@@ -14,33 +14,61 @@ function ApplicationCard({ application, updateStatus }) {
       />
       <div className="flex-1">
         <div className="flex justify-between mb-2">
-          <h3 className="text-base font-semibold">{application.username}</h3>
+          <h3 className="text-base font-semibold">{application._doc.username}</h3>
           <div className="flex gap-2 ]">
             <ActionButton
               variant="accept"
-              onClick={() => updateStatus(application.id, "Shortlisted")}
+              onClick={async () => {
+                console.log("Accepting application", application);
+                const res = await fetch("http://localhost:3000/applyJobs/select", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    token: localStorage.getItem("token"),
+                  },
+                  body: JSON.stringify({
+                    jobId: application.matchedJobIds[0],
+                    employeeUsername: application.username,
+                  }),
+                });
+                window.location.reload();
+              } }
             >
               Accept
             </ActionButton>
             <ActionButton
               variant="reject"
-              onClick={() => updateStatus(application.id, "Rejected")}
+              onClick={async () => {
+                console.log("Accepting application", application);
+                const res = await fetch("http://localhost:3000/applyJobs/reject", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    token: localStorage.getItem("token"),
+                  },
+                  body: JSON.stringify({
+                    jobId: application.matchedJobIds[0],
+                    employeeUsername: application.username,
+                  }),
+                });
+                window.location.reload();
+              } }
             >
               Reject
             </ActionButton>
             <div className="cursor-pointer hover:bg-white/15 bg-white/10 flex justify-center items-center px-[10px] rounded-[10px]">View Profile</div>
           </div>
         </div>
-        {/* <div className="flex gap-6 text-sm text-zinc-400">
-          <div>{application.role}</div>
-          <div>{application.experience}</div>
-          <div>{application.location}</div>
-        </div> */}
-        {/* <div className="flex gap-2 mt-3">
+         <div className="flex gap-6 text-sm text-zinc-400">
+          <div>{application._doc.role}</div>
+          <div>Experience: {application._doc.experience} Years</div>
+          <div>Location: {application._doc.location}</div>
+        </div> 
+         <div className="flex gap-2 mt-3">
           {application.skills?.map((skill) => (
             <SkillTag key={skill}>{skill}</SkillTag>
           ))}
-        </div> */}
+        </div> 
       </div>
       {/* <StatusBadge status={application.status} /> */}
     </article>

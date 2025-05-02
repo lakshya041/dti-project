@@ -13,8 +13,27 @@ function DashboardPage() {
   const [shortlistedCandidates, setShortlistedCandidates] = useState(() => 45);
   const [recentJobs, setRecentJobs] = useState(() => []);
   const [recentApplications, setRecentApplications] = useState(() => []);
-  const [upcomingInterviews, setUpcomingInterviews] = useState(() => []);
 
+  const [upcomingInterviews, setUpcomingInterviews] = useState(() => [
+    {
+      id: 1,
+      candidate: "You",
+      role: "Senior Frontend Developer at TechCorp",
+      time: "Today, 2:00 PM",
+    },
+    {
+      id: 2,
+      candidate: "You",
+      role: "DevOps Engineer at InnoTech",
+      time: "Tomorrow, 11:00 AM",
+    },
+    {
+      id: 3,
+      candidate: "You",
+      role: "Product Designer at Designify",
+      time: "May 5, 3:30 PM",
+    },
+  ]);
   useEffect(() => {
     const fetchdata = async () => {
       const res = await fetch("http://localhost:3000/loadAlluserJobs/", {

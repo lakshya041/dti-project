@@ -44,7 +44,9 @@ const JobPostingForm = () => {
     });
 
     const data = await res.json();
-    console.log(data);
+    if(data.message=="added success"){
+      alert("Job posted successfully");
+    }
   };
 
   const jobTypeOptions = [

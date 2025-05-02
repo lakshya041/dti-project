@@ -1,22 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export default function SettingsContent() {
-  const [userData, setUserData] = useState({
-    name: "",
-    surname: "",
-    email: "",
-    city: "",
-    timezone: "UTC/GMT +0 hours",
-    dateFormat: "dd/mm/yyyy 00:00",
-    function: "",
-    jobTitle: "",
-    image: "",
-  });
-
+  const [userData, setUserData] = useState({});
+  const nameRef = useRef(null);
+  const surnameRef = useRef(null);
+  const emailRef = useRef(null);
+  const cityRef = useRef(null);
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch("http://localhost:3000/api/profile", {
+        const response = await fetch("http://localhost:3000/employer/profile", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -24,22 +17,19 @@ export default function SettingsContent() {
           },
         });
         const data = await response.json();
-        if (data.message === "Profile data fetched successfully") {
-          setUserData({
-            name: data.data.userName,
-            surname: data.surname || "",
-            email: data.data.email || "",
-            image: data.data.image || "",
-          });
-        } else {
-          console.error("Failed to fetch user data:", data.message);
-        }
+        setUserData(data.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     }
     fetchUserData();
   }, []);
+  useEffect(() => {
+    console.log(userData)
+    nameRef.current.value = userData.username;
+    emailRef.current.value = userData.email;
+  }
+  , [userData]);
 
   return (
     <div className="bg-black/20 rounded-2xl p-8 space-y-10 shadow-lg text-white">
@@ -53,27 +43,24 @@ export default function SettingsContent() {
             <input
               className="p-3 bg-black/30 rounded-xl border border-gray-700 focus:border-blue-500"
               placeholder="Name"
-              value={userData.name}
-              onChange={(e) => setUserData({ ...userData, name: e.target.value })}
+              ref={nameRef}
             />
             <input
               className="p-3 bg-black/30 rounded-xl border border-gray-700 focus:border-blue-500"
               placeholder="Surname"
-              value={userData.surname}
-              onChange={(e) => setUserData({ ...userData, surname: e.target.value })}
+              ref={surnameRef}
             />
             <input
               type="email"
               className="p-3 col-span-2 bg-black/30 rounded-xl border border-gray-700 focus:border-blue-500"
               placeholder="Email"
-              value={userData.email}
-              onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+              ref={emailRef}
             />
           </div>
           {/* Avatar */}
           <div className="flex flex-col items-center space-y-2">
             <div className="w-24 h-24 rounded-full bg-black/30 overflow-hidden">
-              <img src={userData.image} alt="Avatar" className="w-full h-full object-cover" />
+              <img src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg?semt=ais_hybrid&w=740" alt="Avatar" className="w-full h-full object-cover" />
             </div>
             <button className="px-4 py-1 text-sm bg-black/30 rounded-lg hover:bg-black/40">
               Edit photo
@@ -90,21 +77,16 @@ export default function SettingsContent() {
           <input
             className="p-3 bg-black/30 rounded-xl border border-gray-700 focus:border-blue-500"
             placeholder="City"
-            value={userData.city}
-            onChange={(e) => setUserData({ ...userData, city: e.target.value })}
+            ref={cityRef}
           />
           <select
             className="p-3 bg-black/30 rounded-xl border border-gray-700 focus:border-blue-500"
-            value={userData.timezone}
-            onChange={(e) => setUserData({ ...userData, timezone: e.target.value })}
           >
             <option>UTC/GMT -4 hours</option>
             <option>UTC/GMT +0 hours</option>
           </select>
           <select
             className="p-3 bg-black/30 rounded-xl border border-gray-700 focus:border-blue-500"
-            value={userData.dateFormat}
-            onChange={(e) => setUserData({ ...userData, dateFormat: e.target.value })}
           >
             <option>dd/mm/yyyy 00:00</option>
             <option>mm/dd/yyyy 00:00</option>
@@ -120,14 +102,10 @@ export default function SettingsContent() {
           <input
             className="p-3 bg-black/30 rounded-xl border border-gray-700 focus:border-blue-500"
             placeholder="Function"
-            value={userData.function}
-            onChange={(e) => setUserData({ ...userData, function: e.target.value })}
           />
           <input
             className="p-3 bg-black/30 rounded-xl border border-gray-700 focus:border-blue-500"
             placeholder="Job Title"
-            value={userData.jobTitle}
-            onChange={(e) => setUserData({ ...userData, jobTitle: e.target.value })}
           />
         </div>
       </section>
