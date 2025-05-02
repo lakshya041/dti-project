@@ -3,8 +3,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
-import { z } from "zod";
-import { employeeModel, employerDashboardModel, jobsModel } from "../db.js";
+import { employeeModel, employerDashboardModel, employerModel, jobsModel } from "../db.js";
 const applyJobsRouter = Router()
 
 applyJobsRouter.post("/", async function (req, res) {
@@ -161,7 +160,68 @@ applyJobsRouter.post("/apply", async function (req, res) {
 }
 )
 
+applyJobsRouter.get("/employer/applications", async function (req, res) {
+    try {
+        console.log("gsdfsdhd")
+        // Verify employer's token
+        const employer = jwt.verify(req.headers.token, JWT_SECRET);
 
+        // Fetch all jobs posted by the employer
+        const employerJobs = await jobsModel.find({ username: employer.username });
+
+        if (!employerJobs || employerJobs.length === 0) {
+            return res.status(404).json({ message: "No jobs found for this employer" });
+        }
+
+        // Extract job IDs posted by the employer
+        const jobIds = employerJobs.map(job => job.jobId);
+
+        // Find employees who have applied to these jobs
+        const appliedEmployees = await employeeModel.find({
+            appliedId: { $in: jobIds }
+        });
+
+        if (!appliedEmployees || appliedEmployees.length === 0) {
+            return res.json({ message: "No applications found", appliedUsers: [] });
+        }
+        // Return the applied employees' objects
+        res.json({ message: "Applications found", appliedUsers: appliedEmployees });
+    } catch (err) {
+        console.error("Error fetching employer applications:", err);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+applyJobsRouter.get("/selected", async (req, res) => {
+    try {
+        // Verify employer's token
+        const username = jwt.verify(req.headers.token, JWT_SECRET);
+
+        // Fetch employer data
+        const employerData = await employerModel.findOne({
+            username: username.username
+        });
+
+        if (!employerData || !employerData.hiredEmployees || employerData.hiredEmployees.length === 0) {
+            return res.status(404).json({ message: "No hired employees found" });
+        }
+
+        // Get the array of hired employees' usernames
+        const employees = employerData.hiredEmployees;
+
+        // Fetch employee data for the hired employees
+        const employeeDetails = await employeeModel.find({
+            username: { $in: employees }
+        });
+
+        // Return the array of employee objects
+        res.json({ message: "Hired employees found", employees: employeeDetails });
+    } catch (err) {
+        console.error("Error fetching selected employees:", err);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+    
 
 export {
     applyJobsRouter

@@ -15,14 +15,14 @@ function ApplicationCard({ application }) {
   return (
     <article className="flex justify-between items-center p-3 rounded-lg bg-[#FFFFFF]/3">
       <div>
-        <h4 className="mb-1 text-base">{application.name}</h4>
+        <h4 className="mb-1 text-base">{application.username}</h4>
         <p className="text-sm text-zinc-400">{application.role}</p>
       </div>
       <span
-        className="px-3 py-1 text-sm rounded-xl"
+        className= "cursor-pointer px-3 py-1 text-sm rounded-xl"
         style={getStatusStyles(application.status)}
       >
-        {application.status}
+        View Profile
       </span>
     </article>
   );

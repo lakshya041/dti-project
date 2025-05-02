@@ -45,6 +45,7 @@ const employerSchema = new Schema({
     username: String,
     email: String,
     password: String,
+    hiredEmployees : {type :Array, default: []},
 });
 
 const jobsSchema = new Schema({

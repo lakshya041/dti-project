@@ -25,6 +25,7 @@ function DashboardPage() {
       });
       const data = await res.json();
       if (data.message === "got jobs") {
+        console.log(data.jobs);
         setTotalJobs(data.jobs.length);
         setActiveApplications(data.jobs.length)
         setRecentJobs(data.jobs.slice(0, 3));
@@ -33,11 +34,30 @@ function DashboardPage() {
     fetchdata();
   }, []);
 
+  useEffect(() => {
+    async function fetchApplications() {
+      const res = await fetch("http://localhost:3000/applyJobs/employer/applications", {
+        method: "GET",
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      });
+      const data = await res.json();
+      setRecentApplications(data.appliedUsers);
+    }
+    fetchApplications();
+  }, []);
+
+  useEffect(() => {
+    console.log(recentApplications)
+  }
+    , [recentApplications]);
+
   return (
     <main className="p-8 min-h-screen text-white bg-neutral-900">
       <section className="grid gap-6 mb-8 grid-cols-[repeat(3,1fr)]">
 
-          <StatCard title="Total Jobs" value={totalJobs} />
+        <StatCard title="Total Jobs" value={totalJobs} />
         <StatCard title="Active Applications" value={activeApplications} />
         <StatCard title="Shortlisted" value={shortlistedCandidates} />
       </section>
@@ -55,9 +75,13 @@ function DashboardPage() {
         <article className="p-6 rounded-xl border border-solid border-white/10">
           <h3 className="mb-4 text-lg">Recent Applications</h3>
           <div className="flex flex-col gap-3">
-            {recentApplications.map((application) => (
-              <ApplicationCard key={application.id} application={application} />
-            ))}
+            {recentApplications  ? (
+              recentApplications.map((application) => (
+                <ApplicationCard key={application.id} application={application} />
+              ))
+            ) : (
+              <p>No recent applications found.</p>
+            )}
           </div>
         </article>
       </section>

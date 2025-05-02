@@ -9,12 +9,12 @@ function ApplicationCard({ application, updateStatus }) {
     <article className="flex gap-6 p-6 border-b border-solid border-b-white/10 border-b-opacity-10">
       <img
         className="object-cover w-12 h-12 rounded-full"
-        src={application.avatar}
+        src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg?semt=ais_hybrid&w=740"
         alt={`${application.name}'s profile`}
       />
       <div className="flex-1">
         <div className="flex justify-between mb-2">
-          <h3 className="text-base font-semibold">{application.name}</h3>
+          <h3 className="text-base font-semibold">{application.username}</h3>
           <div className="flex gap-2 ]">
            
             <ActionButton
